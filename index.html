@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>The Psychic Game!</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+
+    <h1>The Psychic Game</h1>
+    <p>Guess what letter I'm thinking of</p>
+    <h2 id="wins">Wins:</h2>
+    <h2 id="losses">Losses:</h2>
+    <h2 id="guessesLeft">guessesLeft:</h2>
+    <h2 id="guessesMade">guessesMade:</h2>
+
+    <script type="text/javascript">
+//array is a container
+    var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+        var computerGuess = letters[Math.floor(Math.random()*letters.length)];
+        console.log(computerGuess);
+
+        
+    //variables are just a name for something
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 9; 
+    var guessesMadestring =  "";
+
+    document.getElementById("wins").innerHTML+=" " + wins;
+
+    document.onkeyup = function(event) {
+      //1 equal is how you assign a value to a variable
+      //2 and 3 equals is how you compare values
+
+      var userguess = String.fromCharCode(event.keyCode).toLowerCase();
+      
+      guessesMadestring = guessesMadestring +  userguess + ",";
+
+      
+
+       if (userguess === computerGuess) {
+        console.log("Yehhh!");
+        document.getElementById("wins").innerHTML="wins: " + ++wins;
+      }
+      else if (userguess !== computerGuess){
+        console.log("Booo!");
+        document.getElementById("guessesLeft").innerHTML="guessesLeft: " + --guessesLeft;
+
+
+
+        document.getElementById("guessesMade").innerHTML="guessesMade: " + guessesMadestring;
+             console.log(userguess);
+
+
+        if (userguess !== computerGuess && guessesLeft===0){
+          alert("Game Over");
+          if (userguess !== computerGuess){
+             console.log("Booo!");
+             document.getElementById("losses").innerHTML="losses: " + ++losses;
+
+
+             
+
+             Resetgamestats();
+          }
+        }
+      }//end else if 
+}//end keyup function
+
+
+
+
+function Resetgamestats()
+{
+  guessesLeft = 9;
+  document.getElementById("guessesLeft").innerHTML= "guessesLeft: " + guessesLeft;
+
+
+}
+
+
+
+
+//**its a string of conditionals****
+
+
+    </script>
+    
+    
+  </body>
+</html>
